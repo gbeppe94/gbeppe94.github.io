@@ -1,68 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Website</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>Tax Calculator for "Rientro dei cervelli" in Italy
+  </title>
+  <style>
+    /* CSS styles go here */
+    h1 {
+      text-align: center;
+    }
+    form {
+      margin: 0 auto;
+      width: 250px;
+      text-align: center;
+    }
+    label {
+      width: 100px;
+      display: inline-block;
+    }
+    #netSalary {
+      font-weight: bold;
+    }
+    #months {
+      font-weight: bold;
+    }
+    body {
+        background-color: lightblue;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-  <section id="home">
-    <h1>Welcome to my website</h1>
-    <p>This is a simple example of a website that can be hand-coded using HTML, CSS, and JavaScript.</p>
-  </section>
-  <section id="about">
-    <h2>About Us</h2>
-    <p>We are a small business that specializes in web development and design.</p>
-  </section>
-  <section id="services">
-    <h2>Our Services</h2>
-    <ul>
-      <li>Web Design</li>
-      <li>Web Development</li>
-      <li>E-commerce Solutions</li>
-    </ul>
-  </section>
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name"><br>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email"><br>
-      <label for="message">Message:</label>
-      <textarea id="message" name="message"></textarea><br>
-      <input type="submit" value="Send">
-    </form>
-  </section>
-  <footer>
-    <p>Copyright © 2022 My Website</p>
-  </footer>
-  <script src="script.js"></script>
+  <h1>Tax Calculator for "Rientro dei cervelli" in Italy</h1>
+  <form onsubmit="calculateTax(); return false;">
+    <label for="income">Gross Salary:</label>
+    <input type="text" id="income" name="income" onkeyup="if(event.keyCode === 13){calculateTax()}">
+    <br>
+    <label for="months">Months per year:</label>
+    <select id="months" name="months">
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+    </select>
+    <br><br>
+    <label for="region">Region:</label>
+    <select id="region" name="region">
+        <option value="Abruzzo">Abruzzo</option>
+        <option value="Molise">Molise</option>
+        <option value="Campania">Campania</option>
+        <option value="Puglia">Puglia</option>
+        <option value="Basilicata">Basilicata</option>
+        <option value="Calabria">Calabria</option>
+        <option value="Sardegna">Sardegna</option>
+        <option value="Sicilia">Sicilia</option>
+        <option value="other">Other</option>
+    </select>
+    <br><br>
+    <button type="button" onclick="calculateTax()">Calculate Tax</button>
+  </form>
+  <br>
+  <p>Net Salary: €<span id="netSalary"></span></p>
+  <script>
+    // JavaScript functions go here
+    function calculateTax() {
+        var income = document.getElementById("income").value;
+        var months = document.getElementById("months").value;
+        var region = document.getElementById("region").value;
+        var taxrate;
+        var tax;
+        if (income <= 15000) {
+          taxrate = 23;
+          tax = income * (taxrate / 100);
+        } else if (income <= 28000) {
+          taxrate = 25;
+          tax = (15000 * 0.23) + (income - 15000) * (taxrate / 100);
+        } else if (income <= 50000) {
+          taxrate = 35;
+          tax = (15000 * 0.23) + (13000 * 0.25) + (income - 28000) * (taxrate / 100);
+        } else {
+          taxrate = 43;
+          tax = (15000 * 0.23) + (13000 * 0.25) + (22000 * 0.35) + (income - 50000) * (taxrate / 100);
+        }
+        if (region === "Abruzzo" || region === "Molise" || region === "Campania" || region === "Puglia" || region === "Basilicata" || region === "Calabria" || region === "Sardegna" || region === "Sicilia") {
+            tax = tax * 0.9;
+        } else {
+            tax = tax * 0.7;
+        }
+        var netSalary = (income - tax)/months;
+        document.getElementById("netSalary").innerHTML = netSalary.toFixed(2);
+    }
+  </script>
 </body>
 </html>
-
-<div class="container">
-  <h1 id="headline">Countdown to my birthday</h1>
-  <div id="countdown">
-    <ul>
-      <li><span id="days"></span>days</li>
-      <li><span id="hours"></span>Hours</li>
-      <li><span id="minutes"></span>Minutes</li>
-      <li><span id="seconds"></span>Seconds</li>
-    </ul>
-  </div>
-  <div id="content" class="emoji">
-    <span>🥳</span>
-    <span>🎉</span>
-    <span>🎂</span>
-  </div>
-</div>
