@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Net Salary Calculator</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div id="container">
+    <h1>Net Salary Calculator for "Rientro dei cervelli" in Italy</h1>
+    <div id="calculator">
+      <form>
+        <label>Enter gross salary:</label>
+        <input type="number" id="gross" placeholder="0">
+        <br>
+        <label>Number of salaries per year:</label>
+        <select id="salariesPerYear">
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+        </select>
+        <br>
+        <label>Select tax discount:</label>
+        <select id="taxRateOption">
+          <option value="1">10% of the original tax</option>
+          <option value="2">30% of the original tax</option>
+        </select>
+        <br>
+        <button type="button" onclick="calculate()">Calculate</button>
+      </form>
+      <p id="result">Net Salary: <span id="net"></span>€</p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
